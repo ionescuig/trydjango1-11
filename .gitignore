@@ -4,6 +4,7 @@ scripts/
 tcl/
 pip-selfcheck.json
 __pycache__/
+.idea/
 
 *.pyc
 *.key
