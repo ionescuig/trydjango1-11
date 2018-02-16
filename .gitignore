@@ -1,0 +1,9 @@
+include/
+lib/
+scripts/
+tcl/
+pip-selfcheck.json
+__pycache__/
+
+*.pyc
+*.key
