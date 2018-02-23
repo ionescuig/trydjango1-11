@@ -1,5 +1,7 @@
 from .forms import RestaurantCreateForm, RestaurantLocationCreateForm
 from .models import RestaurantLocation
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
@@ -33,7 +35,13 @@ class RestaurantDetailView(DetailView):
     queryset = RestaurantLocation.objects.all()
 
 
-class RestaurantCreateView(CreateView):
+class RestaurantCreateView(LoginRequiredMixin, CreateView):
     form_class = RestaurantLocationCreateForm
+    # login_url = '/login/' # I already set it up in settings
     template_name = 'restaurants/form.html'
     success_url = '/restaurants/'
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.owner = self.request.user
+        return super(RestaurantCreateView, self).form_valid(form)
