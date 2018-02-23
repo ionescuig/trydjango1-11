@@ -30,9 +30,7 @@ urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^restaurants/', include('restaurants.urls', namespace='restaurants')),
-    # url(r'^restaurants/$', RestaurantListView.as_view(), name='restaurants'),
-    # url(r'^restaurants/create/$', RestaurantCreateView.as_view(), name='restaurants-create'),
-    # url(r'^restaurants/(?P<slug>[\w-]+)/$', RestaurantDetailView.as_view(), name='restaurant-detail'),
+    url(r'^items/', include('menus.urls', namespace='menus')),
     url(r'^about/$', TemplateView.as_view(template_name='about.html'), name='about'),
     url(r'^contact/$', TemplateView.as_view(template_name='contact.html'), name='contact'),
 ]
