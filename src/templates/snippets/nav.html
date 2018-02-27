@@ -6,12 +6,10 @@
     |
     <a href="{% url 'contact' %}">Contact</a>
     <br/>
-    <a href="{% url 'restaurants:list' %}">Restaurants</a>
-    |
-    <a href="{% url 'restaurants:create' %}">Add Restaurant</a>
-    <br/>
-    <a href="{% url 'menus:list' %}">Menu Items</a>
-    |
-    <a href="{% url 'menus:create' %}">Add Item</a>
-    <br/>
+    {% if request.user.is_authenticated %}
+        <a href="{% url 'restaurants:list' %}">Restaurants</a>
+        |
+        <a href="{% url 'menus:list' %}">Menu Items</a>
+        <br/>
+    {% endif %}
 </div>
