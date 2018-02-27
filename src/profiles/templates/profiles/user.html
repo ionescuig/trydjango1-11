@@ -6,28 +6,30 @@
 
 {% block content %}
 <h1>{{ user.username }}</h1>
-<hr/>
+<br/>
 
 {% for rest in user.restaurantlocation_set.all %}
-<div class="row">
-<div class="col-sm-12">
-    <div class="card card-default">
-        <h4>{{ rest.title }}</h4>
-        <p>{{ rest.location }} | {{ rest.category }}</p>
-        <ul>
-            {% for item in rest.item_set.all %}
-            <li style="margin-bottom: 15px"><b>{{ item.name }}</b><br/>
-                    {% for ing in item.get_contents %}
-                    <span class="badge badge-light">
-                        {{ ing }}
-                    </span>
+{% if rest.item_set.all %}
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card card-outline-secondary mb-3">
+                <h4>{{ rest.title }}</h4>
+                <p>{{ rest.location }} | {{ rest.category }}</p>
+                <ul>
+                    {% for item in rest.item_set.all %}
+                    <li style="margin-bottom: 15px"><b>{{ item.name }}</b><br/>
+                            {% for ing in item.get_contents %}
+                            <span class="badge badge-light">
+                                {{ ing }}
+                            </span>
+                            {% endfor %}
+                        </li>
                     {% endfor %}
-                </li>
-            {% endfor %}
-        </ul>
+                </ul>
+            </div>
+        </div>
     </div>
-</div>
-</div>
+{% endif %}
 {% endfor %}
 
 {% endblock %}
