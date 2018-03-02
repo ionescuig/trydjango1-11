@@ -1,0 +1,14 @@
+muypicky/settings/local.py
+
+.py[cod]
+
+include/
+lib/
+scripts/
+tcl/
+pip-selfcheck.json
+__pycache__/
+.idea/
+
+*.pyc
+*.key
