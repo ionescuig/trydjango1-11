@@ -26,8 +26,43 @@
     </ul>
 {% endif %}
 
-<hr/>
 <h3>Make changes</h3>
-{% include 'snippets/form-snippet.html' with form=form %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-inline pb-3">
+        <label for="restaurant">Restaurant:</label>
+        <select class="form-control" id="restaurant" name="restaurant">
+            {% for rest in form.restaurant %}
+            {{ rest }}
+            {% endfor %}
+        </select>
+    </div>
+    <div class="form-inline pb-3">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" id="name" name="name" value="{{ form.instance.name }}">
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group pb-3">
+            <label>Contents:</label>
+            <textarea class="form-control" rows="5" name="contents">{{ form.instance.contents }}</textarea>
+        </div>
+        <div class="col-md-6 form-group pb-3">
+            <label>Excludes:</label>
+            <textarea class="form-control" rows="5" name="excludes">{{ form.instance.excludes }}</textarea>
+        </div>
+    </div>
+    <div class="form-check pb-3">
+        <label class="form-check-label" for="id_public">
+            {% if form.instance.public %}
+                <input type="checkbox" checked class="form-check-input" id="id_public" name="public">
+            {% else %}
+                <input type="checkbox" class="form-check-input" id="id_public" name="public">
+            {% endif %}
+            Public
+        </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<hr/>
 
 {% endblock %}

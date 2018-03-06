@@ -64,5 +64,5 @@ class ItemUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_form_kwargs(self):
         kwargs = super(ItemUpdateView, self).get_form_kwargs()
-        kwargs['user']=self.request.user
+        kwargs['user'] = self.request.user
         return kwargs

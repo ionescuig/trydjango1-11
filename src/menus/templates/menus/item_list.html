@@ -5,35 +5,63 @@
 {% endblock %}
 
 {% block content %}
-<h1>Menu Items <small><a href="{% url 'menus:create' %}">Add</a></small></h1>
+<div class="row justify-content-md-center">
+        <div class="col-md-10 col-md-offset-5">
+            <div class="d-flex p-4 my-3 bg-info text-white rounded justify-content-end">
+                <div class="mr-auto lh-100"><h5>Menu Items</h5></div>
+                <div><h5><a style="color: white" href="{% url 'menus:create' %}">
+                        <i class="fas fa-plus"></i></a>
+                    </h5>
+                </div>
+            </div>
 
-<ul>
-    {% for obj in object_list %}
-        <li>
-            <a href="{{ obj.pk }}">{{ obj.name }}</a><br/>
+            <div class="my-3 p-3 bg-white rounded box-shadow">
+            {% for obj in object_list %}
+                <div class="media text-muted pt-3">
+                    <div class="row media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <div class="col-md-5">
+                            <strong class="d-block">
+                                <a style="color: #279bbe" href="{{ obj.pk }}">{{ obj.name }}</a>
+                            </strong>
+                            <small>
+                                <a style="color: #1e7994" href="{% url 'profiles:detail'
+                                username=obj.user.username %}?q={{ obj.restaurant.title }}">
+                                    <strong>{{ obj.restaurant.title }}</strong></a> &nbsp
+                                <a style="color: #1e7994" href="{% url 'profiles:detail'
+                            username=obj.user.username %}?q={{ obj.restaurant.location }}">
+                                    {{ obj.restaurant.location }}</a> &nbsp
+                                <a style="color: #1e7994" href="{% url 'profiles:detail'
+                            username=obj.user.username %}?q={{ obj.restaurant.category }}">
+                                    {{ obj.restaurant.category }}</a>
+                                <br/>{{ obj.updated }}<br/>
+                            </small>
+                        </div>
+                        <div class="col-md-7">
+                            <strong>Contents:</strong> &nbsp
+                            {% for ing in obj.get_contents %}
+                            <a style="color: #1e7994" href="{% url 'profiles:detail'
+                            username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+                            &nbsp
+                            {% endfor %}
+                            <br/>
+                            {% if obj.excludes %}
+                                <strong>Excludes:</strong> &nbsp
+                                {% for ing in obj.get_excludes %}
+                                <a style="color: #1e7994" href="{% url 'profiles:detail'
+                                username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+                                &nbsp
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            <small class="d-block mt-3">
+                <a href="#">Top</a>
+            </small>
+            </div>
 
-            {% if obj.contents %}
-                Contents
-                <ul>
-                    {% for item in obj.get_contents %}
-                        <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
+        </div>
+    </div>
 
-            {% if obj.excludes %}
-                Excludes
-                <ul>
-                    {% for item in obj.get_excludes %}
-                        <li>{{ item }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-
-        </li>
-
-        {% empty %}
-            <a href="{% url 'menus:create' %}">Add Menu Item</a>
-    {% endfor %}
-</ul>
 {% endblock %}
