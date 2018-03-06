@@ -1,32 +1,57 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="row justify-content-sm-center">
-        <div class="col-sm-6 text-center col-sm-offset-3">
-            <h1>User Following Feed</h1>
+    <div class="row justify-content-md-center">
+        <div class="col-md-10 col-md-offset-5">
 
-            {% for obj in object_list %}
-            <div class="card card-outline-secondary mb-2">
-                <h3><a href="{% url 'profiles:detail' username=obj.user.username %}">{{ obj.user.username }}</a></h3>
-                <h4>{{ obj.name }}</h4>
-                <p>
-                    <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.title }}">
-                        {{ obj.restaurant.title }}</a> |
-                    <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.location }}">
-                        {{ obj.restaurant.location }}</a> |
-                    <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.category }}">
-                        {{ obj.restaurant.category }}</a>
-                </p>
-                <p>
-                    <b>{{ obj.name }}</b>:
-                    {% for ing in obj.get_contents %}
-                        <span class="badge badge-light">
-                            <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
-                        </span>
-                    {% endfor %}
-                </p>
+            <div class="flex align-items-center p-4 my-3 bg-info rounded box-shadow">
+                <div class="lh-100">
+                    <h5 class="mb-0 text-white lh-100">User Following Feed</h5>
+                </div>
             </div>
+
+            <div class="my-3 p-3 bg-white rounded box-shadow">
+            {% for obj in object_list %}
+                <div class="media text-muted pt-3">
+                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+                        <p>
+                            <strong class="d-block text-gray-dark">
+                                <a href="{% url 'profiles:detail' username=obj.user.username %}">{{ obj.user.username }}</a>
+                            </strong>
+                            <small>{{ obj.updated }}</small>
+                        </p>
+
+                        <p>
+                            <strong>{{ obj.name }}</strong>
+                            <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.title }}">
+                                {{ obj.restaurant.title }}</a> |
+                            <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.location }}">
+                                {{ obj.restaurant.location }}</a> |
+                            <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.category }}">
+                                {{ obj.restaurant.category }}</a>
+                        <br/>
+                            Contents:
+                            {% for ing in obj.get_contents %}
+                            <span class="badge badge-light">
+                                <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+                            </span>
+                            {% endfor %}
+                            <br/>
+                            Excludes:
+                            {% for ing in obj.get_excludes %}
+                            <span class="badge badge-light">
+                                <a href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+                            </span>
+                            {% endfor %}
+                        </p>
+
+                    </div>
+                </div>
             {% endfor %}
+            <small class="d-block mt-3">
+                <a href="#">Top</a>
+            </small>
+            </div>
 
         </div>
     </div>

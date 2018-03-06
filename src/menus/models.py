@@ -30,4 +30,4 @@ class Item(models.Model):
         return self.contents.split(",")
 
     def get_excludes(self):
-        return self.contents.split(",")
+        return self.excludes.split(",")
