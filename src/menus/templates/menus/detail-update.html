@@ -5,64 +5,95 @@
 {% endblock %}
 
 {% block content %}
-<h1>{{ form.instance.name }}</h1>
-<p>Location: {{ form.instance.restaurant.name }}</p>
+<div class="row justify-content-md-center">
+    <div class="col-md-10 col-md-offset-5">
 
-{% if form.instance.contents %}
-    Contents
-    <ul>
-        {% for item in form.instance.get_contents %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-{% if form.instance.excludes %}
-    Excludes
-    <ul>
-        {% for item in form.instance.get_excludes %}
-            <li>{{ item }}</li>
-        {% endfor %}
-    </ul>
-{% endif %}
-
-<h3>Make changes</h3>
-<form method="POST">
-    {% csrf_token %}
-    <div class="form-inline pb-3">
-        <label for="restaurant">Restaurant:</label>
-        <select class="form-control" id="restaurant" name="restaurant">
-            {% for rest in form.restaurant %}
-            {{ rest }}
-            {% endfor %}
-        </select>
-    </div>
-    <div class="form-inline pb-3">
-        <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name" name="name" value="{{ form.instance.name }}">
-    </div>
-    <div class="row">
-        <div class="col-md-6 form-group pb-3">
-            <label>Contents:</label>
-            <textarea class="form-control" rows="5" name="contents">{{ form.instance.contents }}</textarea>
+        <!-- Item: Title bar -->
+        <div class="d-flex p-4 my-3 bg-info text-white rounded justify-content-end">
+            <div class="mr-auto lh-100"><h5>{{ form.instance.name }}</h5></div>
         </div>
-        <div class="col-md-6 form-group pb-3">
-            <label>Excludes:</label>
-            <textarea class="form-control" rows="5" name="excludes">{{ form.instance.excludes }}</textarea>
-        </div>
-    </div>
-    <div class="form-check pb-3">
-        <label class="form-check-label" for="id_public">
-            {% if form.instance.public %}
-                <input type="checkbox" checked class="form-check-input" id="id_public" name="public">
-            {% else %}
-                <input type="checkbox" class="form-check-input" id="id_public" name="public">
-            {% endif %}
-            Public
-        </label>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-<hr/>
 
+        <!-- Item: Details -->
+        <div class="p-3 bg-white rounded box-shadow">
+            <div class="media text-muted">
+                <div class="row media-body small lh-125 border-gray">
+                    <div class="col-md-6 text-info">
+                        <strong>{{ form.instance.restaurant.name }}</strong>
+                        <br/>{{ form.instance.restaurant.location }}
+                        <br/>{{ form.instance.restaurant.category }}
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Contents:</strong>
+                        <br/>
+                        {% for ing in form.instance.get_contents %}
+                            <ul class="list-group list-unstyled">
+                                <li>{{ ing }}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                    <div class="col-md-3">
+                        <strong>Excludes:</strong><br/>
+                        {% for ing in form.instance.get_excludes %}
+                            <ul class="list-group list-unstyled">
+                                <li>{{ ing }}</li>
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br/>
+        <!-- Make changes: Title bar -->
+        <div class="d-flex py-1 px-4 my-3 bg-secondary text-white rounded justify-content-end">
+            <div class="mr-auto lh-100"><h6>Make Changes</h6></div>
+        </div>
+
+        <!-- Make changes: Item details -->
+        <form method="POST">
+            {% csrf_token %}
+            <div class="my-3 px-3 bg-white rounded box-shadow">
+                <div class="media text-muted">
+                    <div class="row media-body mb-0 py-3 small lh-125 border-gray">
+                        <div class="col-md-6 text-info">
+                            <div class="form-group pb-1">
+                                <label for="name">Name:</label>
+                                <input type="text" class="form-control" id="name" name="name" value="{{ form.instance.name }}">
+                            </div>
+                            <div class="form-group pb-1">
+                                <label for="restaurant">Restaurant:</label>
+                                <select class="form-control" id="restaurant" name="restaurant">
+                                    {% for rest in form.restaurant %}
+                                    {{ rest }}
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-check pb-4">
+                                <label class="form-check-label" for="id_public">
+                                    {% if form.instance.public %}
+                                    <input type="checkbox" checked class="form-check-input" id="id_public" name="public">
+                                    {% else %}
+                                    <input type="checkbox" class="form-check-input" id="id_public" name="public">
+                                    {% endif %}
+                                    Public
+                                </label>
+                            </div>
+                            <button type="submit" class="btn btn-info">Submit</button>
+                        </div>
+                        <div class="col-md-3">
+                            <label>Contents:</label>
+                            <textarea class="form-control" rows="8" name="contents">{{ form.instance.contents }}</textarea>
+                            Separate ingredients by comma.
+                        </div>
+                        <div class="col-md-3">
+                            <label>Excludes:</label>
+                            <textarea class="form-control" rows="8" name="excludes">{{ form.instance.excludes }}</textarea>
+                            Separate ingredients by comma.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}
