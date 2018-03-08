@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-    <a class="navbar-brand" style="font-family: forte; font-size: 25px" href="">MuyPicky</a>
+    <a class="navbar-brand" style="font-family: Titan One; font-size: 22px" href="">MuyPicky</a>
     <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -41,8 +41,8 @@
 <nav class="nav-scroller bg-white box-shadow">
     <nav class="nav nav-underline">
         {% if user.is_authenticated %}
-        <a class="nav-link" href="{% url 'restaurants:list' %}">Restaurants</a>
-        <a class="nav-link" href="{% url 'menus:list' %}">Menu Items</a>
+        <a class="nav-link" href="{% url 'restaurants:list' %}">My Restaurants</a>
+        <a class="nav-link" href="{% url 'menus:list' %}">My Menu Items</a>
         {% endif %}
     </nav>
 </nav>

@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row justify-content-md-center">
+        <div class="col-md-10 col-md-offset-5">
+
+            <!-- Title bar -->
+            <div class="d-flex p-4 my-3 bg-info text-white rounded">
+                <div class="mr-auto lh-100">
+                    {% block title_bar %}{% endblock %}
+                </div>
+                {% block title_bar_right %}{% endblock %}
+            </div>
+
+            <!-- Items -->
+            <div class="my-3 p-3 bg-white rounded box-shadow">
+                {% block items_main %}
+                    {% for obj in object_list %}
+                        <div class="media text-muted pt-3">
+                            <div class="media-body pb-3 small lh-125 border-bottom border-gray">
+                                {% block items %}{% endblock %}
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <!-- Top Button -->
+                    {% block button_top %}
+                    <small class="d-block mt-3">
+                        <a href="#">Top</a>
+                    </small>
+                    {% endblock %}
+                {% endblock %}
+            </div>
+
+            {% block make_changes_main %}{% endblock %}
+
+        </div>
+    </div>
+{% endblock %}

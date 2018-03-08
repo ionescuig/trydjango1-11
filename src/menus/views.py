@@ -18,6 +18,7 @@ class HomeView(View):
 
 
 class ItemListView(LoginRequiredMixin, ListView):
+    template_name = 'menus/item-list.html'
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 

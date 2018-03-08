@@ -1,0 +1,51 @@
+{% extends "base-list.html" %}
+
+{% block head_title %}
+    Menu Items | {{ block.super }}
+{% endblock %}
+
+{% block title_bar %}
+    <h5>Menu Items</h5>
+{% endblock %}
+
+{% block title_bar_right %}
+<div>
+    <h5><a style="color: white" href="{% url 'menus:create' %}">
+        <i class="fas fa-plus"></i></a>
+    </h5>
+</div>
+{% endblock %}
+
+{% block items %}
+    <div class="row">
+        <div class="col-md-5">
+            <strong class="d-block">
+                <a style="color: #279bbe" href="{{ obj.pk }}">{{ obj.name }}</a>
+            </strong>
+            <small>
+                <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.title }}">
+                    <strong>{{ obj.restaurant.title }}</strong></a> &nbsp
+                <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.location }}">
+                    {{ obj.restaurant.location }}</a> &nbsp
+                <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.category }}">
+                    {{ obj.restaurant.category }}</a>
+                <br/>{{ obj.updated }}<br/>
+            </small>
+        </div>
+        <div class="col-md-7">
+            <strong>Contents:</strong> &nbsp
+            {% for ing in obj.get_contents %}
+            <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+            &nbsp
+            {% endfor %}
+            <br/>
+            {% if obj.excludes %}
+            <strong>Excludes:</strong> &nbsp
+            {% for ing in obj.get_excludes %}
+            <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+            &nbsp
+            {% endfor %}
+            {% endif %}
+        </div>
+</div>
+{% endblock %}

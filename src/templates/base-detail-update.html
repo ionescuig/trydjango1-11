@@ -1,0 +1,22 @@
+{% extends 'base-list.html' %}
+
+{% block button-top %}{% endblock %}
+
+{% block make_changes_main %}
+    <!-- Make changes: Title bar -->
+    <div class="d-flex py-1 px-4 my-3 bg-secondary text-white rounded justify-content-end">
+        <div class="mr-auto lh-100"><h6>Make Changes</h6></div>
+    </div>
+
+    <!-- Make changes: Item details -->
+    <form method="POST">
+        {% csrf_token %}
+        <div class="my-3 px-3 bg-white rounded box-shadow">
+            <div class="media">
+                <div class="row media-body mb-0 py-3 small lh-125 text-info border-gray">
+                    {% block make_changes_content %}{% endblock %}
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock %}

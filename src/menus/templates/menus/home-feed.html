@@ -1,60 +1,39 @@
-{% extends 'base.html' %}
+{% extends 'base-list.html' %}
 
-{% block content %}
-    <div class="row justify-content-md-center">
-        <div class="col-md-10 col-md-offset-5">
+{% block title_bar %}
+    <h5 class="mb-0 lh-100">User Following Feed</h5>
+{% endblock %}
 
-            <div class="d-flex align-items-center p-4 my-3 bg-info rounded box-shadow ">
-                <div class="lh-100">
-                    <h5 class="mb-0 text-white lh-100">User Following Feed</h5>
-                </div>
-            </div>
+{% block items %}
+    <p>
+        <strong class="d-block">
+            <a style="color: #279bbe" href="{% url 'profiles:detail' username=obj.user.username %}">
+                {{ obj.user.username }}</a>
+        </strong>
+        <small>{{ obj.updated }}</small>
+    </p>
 
-            <div class="my-3 p-3 bg-white rounded box-shadow">
-            {% for obj in object_list %}
-                <div class="media text-muted pt-3">
-                    <div class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
-                        <p>
-                            <strong class="d-block">
-                                <a style="color: #279bbe" href="{% url 'profiles:detail' username=obj.user.username %}">
-                                    {{ obj.user.username }}</a>
-                            </strong>
-                            <small>{{ obj.updated }}</small>
-                        </p>
-
-                        <p>
-                            <strong>{{ obj.name }}</strong> &nbsp
-                            <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.title }}">
-                                {{ obj.restaurant.title }}</a> &nbsp
-                            <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.location }}">
-                                <em>{{ obj.restaurant.location }}</em></a> &nbsp
-                            <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.category }}">
-                                <em>{{ obj.restaurant.category }}</em></a>
-                        <br/>
-                            Contents: &nbsp
-                            {% for ing in obj.get_contents %}
-                            <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
-                            &nbsp
-                            {% endfor %}
-                            <br/>
-                            {% if obj.excludes %}
-                                Excludes: &nbsp
-                                {% for ing in obj.get_excludes %}
-                                <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
-                                &nbsp
-                                {% endfor %}
-                            {% endif %}
-                        </p>
-
-                    </div>
-                </div>
-            {% endfor %}
-            <small class="d-block mt-3">
-                <a href="#">Top</a>
-            </small>
-            </div>
-
-        </div>
-    </div>
-
+    <p>
+        <strong>{{ obj.name }}</strong> &nbsp
+        <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.title }}">
+            {{ obj.restaurant.title }}</a> &nbsp
+        <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.location }}">
+            <em>{{ obj.restaurant.location }}</em></a> &nbsp
+        <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ obj.restaurant.category }}">
+            <em>{{ obj.restaurant.category }}</em></a>
+        <br/>
+        Contents: &nbsp
+        {% for ing in obj.get_contents %}
+        <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+        &nbsp
+        {% endfor %}
+        <br/>
+        {% if obj.excludes %}
+        Excludes: &nbsp
+        {% for ing in obj.get_excludes %}
+        <a style="color: #1e7994" href="{% url 'profiles:detail' username=obj.user.username %}?q={{ ing }}">{{ ing }}</a>
+        &nbsp
+        {% endfor %}
+        {% endif %}
+    </p>
 {% endblock %}
