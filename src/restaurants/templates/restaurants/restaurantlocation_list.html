@@ -1,20 +1,31 @@
-{% extends "base.html" %}
+{% extends "base-list.html" %}
 
 {% block head_title %}
     Restaurants | {{ block.super }}
 {% endblock %}
 
-{% block content %}
-<h1>My Restaurant <small><a href="{% url 'restaurants:create' %}">Add</a></small></h1>
-
-<ul>
-    {% for obj in object_list %}
-        <li>
-            <a href="{{ obj.get_absolute_url }}">{{ obj }}</a><br/>
-            {{ obj.location }} {{ obj.category }} {{ obj.timestamp }}  {{ obj.updated }}
-        </li>
-        {% empty %}
-            <li><a href="{% url 'restaurants:create' %}">Add One</a></li>
-    {% endfor %}
-</ul>
+{% block title_bar %}
+    <h5>Restaurants</h5>
 {% endblock %}
+
+{% block title_bar_right %}
+<div>
+    <h5><a style="color: white" href="{% url 'restaurants:create' %}">
+        <i class="fas fa-plus"></i></a>
+    </h5>
+</div>
+{% endblock %}
+
+{% block items %}
+    <strong class="d-block">
+        <a style="color: #279bbe" href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
+    </strong>
+    <small>
+        <strong>Location: </strong>{{ obj.location }}
+        <br/>
+        <strong>Category: </strong>{{ obj.category }}
+        <br/>
+        {{ obj.updated }}
+    </small>
+{% endblock %}
+

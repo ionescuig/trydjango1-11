@@ -1,7 +1,7 @@
 {% extends "base-detail-update.html" %}
 
 {% block head_title %}
-    {{ form.instance.name }} | Menu Items | {{ block.super }}
+    {{ form.instance.name }} | {{ block.super }}
 {% endblock %}
 
 {% block title_bar %}
@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block items_main %}
-    <div class="row media media-body small lh-125 border-gray">
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="row media py-3 media-body small lh-125">
         <div class="col-md-6 text-info">
             <strong>{{ form.instance.restaurant.name }}</strong>
             <br/>{{ form.instance.restaurant.location }}
@@ -33,6 +34,12 @@
             {% endfor %}
         </div>
     </div>
+    <div class="media pt-1 media-body small lh-125 border-top border-gray">
+        <div class="text-muted">
+            {{ form.instance.timestamp }}, Updated {{ form.instance.updated|timesince }} ago
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 {% block make_changes_content %}
@@ -64,12 +71,11 @@
     <div class="col-md-3">
         <label>Contents:</label>
         <textarea class="form-control" rows="10" name="contents" style="font-size: 12px">{{ form.instance.contents }}</textarea>
-        <p style="color: grey">Separate ingredients by comma.</p>
+        <p style="color: grey">Separate ingredients by commas.</p>
     </div>
     <div class="col-md-3">
         <label>Excludes:</label>
-        <textarea class="form-control" rows="10" name="contents" style="font-size: 12px">{{ form.instance.contents }}</textarea>
-        <p style="color: grey">Separate ingredients by comma.</p>
-    </div>
+        <textarea class="form-control" rows="10" name="excludes" style="font-size: 12px">{{ form.instance.excludes }}</textarea>
+        <p style="color: grey">Separate ingredients by commas.</p>
     </div>
 {% endblock %}

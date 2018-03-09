@@ -19,6 +19,7 @@ class HomeView(View):
 
 class ItemListView(LoginRequiredMixin, ListView):
     template_name = 'menus/item-list.html'
+
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
 
@@ -29,7 +30,7 @@ class ItemDetailView(LoginRequiredMixin, DetailView):
 
 
 class ItemCreateView(LoginRequiredMixin, CreateView):
-    template_name = 'form.html'
+    template_name = 'menus/item-create.html'
     form_class = ItemForm
 
     def form_valid(self, form):
@@ -39,7 +40,7 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
     def get_form_kwargs(self):
         kwargs = super(ItemCreateView, self).get_form_kwargs()
-        kwargs['user']=self.request.user
+        kwargs['user'] = self.request.user
         return kwargs
 
     def get_queryset(self):

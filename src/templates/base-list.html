@@ -13,24 +13,24 @@
             </div>
 
             <!-- Items -->
+            {% block items_main %}
             <div class="my-3 p-3 bg-white rounded box-shadow">
-                {% block items_main %}
-                    {% for obj in object_list %}
-                        <div class="media text-muted pt-3">
-                            <div class="media-body pb-3 small lh-125 border-bottom border-gray">
-                                {% block items %}{% endblock %}
-                            </div>
+                {% for obj in object_list %}
+                    <div class="media text-muted pt-3">
+                        <div class="media-body pb-3 small lh-125 border-bottom border-gray">
+                            {% block items %}{% endblock %}
                         </div>
-                    {% endfor %}
+                    </div>
+                {% endfor %}
 
-                    <!-- Top Button -->
-                    {% block button_top %}
-                    <small class="d-block mt-3">
-                        <a href="#">Top</a>
-                    </small>
-                    {% endblock %}
+                <!-- Top Button -->
+                {% block button_top %}
+                <small class="d-block mt-3">
+                    <a href="#">Top</a>
+                </small>
                 {% endblock %}
             </div>
+            {% endblock %}
 
             {% block make_changes_main %}{% endblock %}
 

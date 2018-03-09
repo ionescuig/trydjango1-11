@@ -44,7 +44,7 @@ class RestaurantLocation(models.Model):
     objects = RestaurantLocationManager()
 
     def __str__(self):
-        return self.name
+        return self.name+' - '+self.location
 
     def get_absolute_url(self):
         return reverse('restaurants:detail', kwargs={'slug': self.slug})

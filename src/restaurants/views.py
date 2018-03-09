@@ -22,7 +22,7 @@ class RestaurantDetailView(LoginRequiredMixin, DetailView):
 class RestaurantCreateView(LoginRequiredMixin, CreateView):
     form_class = RestaurantLocationCreateForm
     # login_url = '/login/' # I already set it up in settings
-    template_name = 'form.html'
+    template_name = 'restaurants/restaurant-create.html'
     # success_url = '/restaurants/'
 
     def form_valid(self, form):

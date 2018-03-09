@@ -1,16 +1,50 @@
-{% extends "base.html" %}
+{% extends "base-detail-update.html" %}
 
 {% block head_title %}
-    {{ form.instance.title }} | Restaurants | {{ block.super }}
+    {{ form.instance.title }} | {{ block.super }}
 {% endblock %}
 
-{% block content %}
-<h1>{{ form.instance.title }} <small>{{ form.instance.category }}</small></h1>
-<p>{{ form.instance.location }}</p>
-<p>{{ form.instance.timestamp }}, Updated {{ form.instance.updated|timesince }} ago</p>
+{% block title_bar %}
+    <h5>{{ form.instance.name }}</h5>
+{% endblock %}
 
-<hr/>
-<h3>Make Changes</h3>
-{% include 'snippets/form-snippet.html' with form=form %}
+{% block items_main %}
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    <div class="media py-3 media-body small lh-125 border-bottom border-gray">
+        <div class="text-info">
+            <strong>Location: </strong>{{ form.instance.location }}
+            <br/>
+            <strong>Category: </strong>{{ form.instance.category }}
+        </div>
+    </div>
+    <div class="media pt-1 media-body small lh-125">
+        <div class="text-muted">
+            {{ form.instance.timestamp }}, Updated {{ form.instance.updated|timesince }} ago
+        </div>
+    </div>
+</div>
+{% endblock %}
 
+{% block make_changes_content %}
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" style="font-size: 12px" value="{{ form.instance.name }}">
+        </div>
+        <div class="form-group">
+            <label for="location">Location:</label>
+            <input type="text" class="form-control" id="location" name="location" style="font-size: 12px" value="{{ form.instance.location }}">
+        </div>
+        <button type="submit" class="btn btn-info">Submit</button>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label for="category">Category:</label>
+            <input type="text" class="form-control" id="category" name="category" style="font-size: 12px" value="{{ form.instance.category }}">
+        </div>
+        <div class="form-group">
+            <label for="slug">Slug (optional):</label>
+            <input type="text" class="form-control" id="slug" name="slug" style="font-size: 12px" value="{{ form.instance.slug }}">
+        </div>
+    </div>
 {% endblock %}
