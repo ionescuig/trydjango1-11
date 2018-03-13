@@ -20,7 +20,7 @@
             <ul class="navbar-nav mr-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item active">
-                    <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-user"></i> {{ user.username }}</a>
+                    <a class="nav-link" href="{% url 'home' %}"><i class="fas fa-user"></i> {{ request.user.username }}</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>

@@ -9,12 +9,34 @@ class RegisterForm(forms.ModelForm):
     A form for creating new users. Includes all the required
     fields, plus a repeated password.
     """
-    password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
+    username = forms.CharField(label='Username', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Username'
+        }
+    ))
+    email = forms.CharField(label='Email', widget=forms.EmailInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Email'
+        }
+    ))
+    password1 = forms.CharField(label='Password', widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Password'
+        }
+    ))
+    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Password confirmation'
+        }
+    ))
 
     class Meta:
         model = User
-        fields = ('username', 'email',)
+        fields = ('username', 'email', 'password1', 'password2')
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -35,7 +57,7 @@ class RegisterForm(forms.ModelForm):
         # Save the provided password in hashed format
         user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.is_active = False
+        user.is_active = True
         # create a new user hash for activating email.
 
         if commit:

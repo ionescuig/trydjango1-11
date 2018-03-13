@@ -1,45 +1,77 @@
-{% extends "base.html" %}
+{% extends "base-list.html" %}
 
 {% block head_title %}
     {{ user.username }} | {{ block.super }}
 {% endblock %}
 
-{% block content %}
-<h1>{{ user.username }}</h1>
-<p>{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %}</p>
-<form class="form" method="GET" action=".">
-    <input type="text" placeholder="Search..." name="q" value="{{ request.GET.q }}">
-    <button class="btn btn-default" type="submit">Search</button>
-</form>
-<hr/>
+{% block title_bar %}
+<h1 class="pl-2">{{ user.username }}</h1>
+{% include 'profiles/snippet/follow_form.html' with username=user.username is_following=is_following %}
+{% endblock %}
+
+{% block title_bar_right %}
+    <form class="form-inline mt-2 mr-2" method="GET" action=".">
+        <input class="form-control" type="text" placeholder="Search..." name="q" value="{{ request.GET.q }}">
+        <button class="ml-1 btn btn-default" type="submit">Search</button>
+    </form>
+{% endblock %}
+
+
+{% block items_main %}
 
 {% if locations %}
-{% for rest in locations %}
-<!-- {% if rest.item_set.all %} -->
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card card-outline-secondary mb-3">
-                <h4>{{ rest.title }}</h4>
-                <p>
-                    <a href="{{ request.path }}?q={{ rest.location }}">{{ rest.location }}</a> |
-                    <a href="{{ request.path }}?q={{ rest.category }}">{{ rest.category }}</a>
-                </p>
-                <ul>
-                    {% for item in rest.item_set.all %}
-                    <li style="margin-bottom: 15px"><b>{{ item.name }}</b><br/>
-                        {% for ing in item.get_contents %}
-                            <span class="badge badge-light">
-                                <a href="{{ request.path }}?q={{ ing }}">{{ ing }}</a>
-                            </span>
-                        {% endfor %}
-                    </li>
-                    {% endfor %}
-                </ul>
+<div class="my-3 p-3 bg-white rounded box-shadow">
+    {% for rest in locations %}
+        <div class="media text-muted pt-3">
+            <div class="media-body small lh-125 border-bottom border-gray">
+                <div class="row">
+                    <div class="col-md-5">
+                        <a href="{{ request.path }}?q={{ rest.title }}" class="text-info">
+                            <strong>{{ rest.title }}</strong>
+                        </a>
+                        <p>
+                            <a href="{{ request.path }}?q={{ rest.location }}" class="text-info">{{ rest.location }}</a> |
+                            <a href="{{ request.path }}?q={{ rest.category }}" class="text-info">{{ rest.category }}</a>
+                        </p>
+                    </div>
+                    <div class="col-md-7">
+                        <ul class="list-unstyled">
+                        {% for item in rest.item_set.all %}
+                            <li class="pb-3">
+                                <a class="text-info" href="{{ request.path }}?q={{ item.name }}">
+                                    <strong>{{ item.name }}</strong>
+                                </a>
+                                <br/>
+                                <strong>Contents:</strong> &nbsp
+                                {% for ing in item.get_contents %}
+                                    <a class="text-info" href="{{ request.path }}?q={{ ing }}">{{ ing }}</a>
+                                    &nbsp
+                                {% endfor %}
+                                <br/>
+                                {% if item.excludes %}
+                                    <strong>Excludes:</strong> &nbsp
+                                    {% for ing in item.get_excludes %}
+                                        <a class="text-info" href="{{ request.path }}?q={{ ing }}">{{ ing }}</a>
+                                        &nbsp
+                                    {% endfor %}
+                                {% endif %}
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-<!-- {% endif %} -->
-{% endfor %}
+
+    {% endfor %}
+
+    <!-- Top Button -->
+    {% block button_top %}
+    <small class="d-block mt-3">
+        <a href="#">Top</a>
+    </small>
+    {% endblock %}
+</div>
 {% else %}
 <p class="lead">No Items Found</p>
 {% endif %}

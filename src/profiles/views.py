@@ -30,7 +30,7 @@ def activate_user_view(request, code=None, *args, **kwargs):
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'registration/register.html'
-    success_url = '/'
+    success_url = '/login/'
 
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated():

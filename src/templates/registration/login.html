@@ -1,29 +1,41 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="d-flex pt-5 row text-center justify-content-center align-self-center">
+        <h3 style="font-family: Titan One; font-size: 28px">Please login</h3>
+    </div>
 
-{% if form.errors %}
-    <P>Your username and password did't match. Please try again.</P>
-{% endif %}
+    <div class="d-flex row text-center justify-content-center align-self-center">
 
-{% if next %}
-    {% if user.is_authenticated %}
-        <p>Your account does't have access to this page. To proceed,
-        please login with an account that has access.</p>
-    {% else %}
-        <p>Please login to see this page.</p>
-    {% endif %}
-{% endif %}
+        {% if form.errors %}
+            <p style="color: red"><small>
+                Your username and password did't match.
+                <br/>
+                Please try again.
+            </small></p>
+        {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    {{ form.as_p }}
+        {% if next %}
+            {% if user.is_authenticated %}
+                <p>Your account does't have access to this page. To proceed,
+                please login with an account that has access.</p>
+            {% endif %}
+        {% endif %}
+    </div>
 
-    <input type="submit" value="login" />
-    <input type="hidden" name="text" value="{{ next }}" />
-</form>
-
-{# Assumes you setup the password_reset view in your URLconf #}
-{# <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}
+    <div class="d-flex row text-center justify-content-center align-self-center">
+        <form class="col-md-3 align-middle" action="{% url 'login' %}" method="post">
+            {% csrf_token %}
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" id="username" name="username" class="form-control" placeholder="Username" required autofocus>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+            <div class="py-2">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    {# Assumes you setup the password_reset view in your URLconf #}
+    {# <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}
 
 {% endblock %}
