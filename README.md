@@ -4,3 +4,4 @@ work in progress...
 
 * finished the tutorial
 * working at bootstrap customisation
+* modified relation restaurant-user - any user can see and add items to all restaurants
