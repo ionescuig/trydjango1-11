@@ -13,7 +13,7 @@
     <br/>Hosted on <a href="https://gabriel-muy-picky.herokuapp.com/">heroku</a>.
 </p>
 
-Thinks that have been modified after finishing the tutorial:
+Things that have been modified after finishing the tutorial:
 <ul>
     <li>added bootstrap</li>
     <li>modified relation restaurant-user, any user can see and add items to any restaurant</li>
