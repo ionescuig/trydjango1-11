@@ -40,10 +40,10 @@
 
 <nav class="nav-scroller bg-white box-shadow">
     <nav class="nav nav-underline">
+        <a class="nav-link" href="{% url 'restaurants:list_all' %}">Restaurants</a>
         {% if user.is_authenticated %}
         <a class="nav-link" href="{% url 'restaurants:list' %}">My Restaurants</a>
         <a class="nav-link" href="{% url 'menus:list' %}">My Menu Items</a>
         {% endif %}
     </nav>
 </nav>
-
