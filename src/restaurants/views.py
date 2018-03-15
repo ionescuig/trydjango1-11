@@ -14,6 +14,11 @@ class RestaurantListView(LoginRequiredMixin, ListView):
         return RestaurantLocation.objects.filter(owner=self.request.user)
 
 
+class RestaurantListAllView(ListView):
+    def get_queryset(self):
+        return RestaurantLocation.objects.all().order_by('name')
+
+
 class RestaurantDetailView(LoginRequiredMixin, DetailView):
     def get_queryset(self):
         return RestaurantLocation.objects.filter(owner=self.request.user)
@@ -49,4 +54,4 @@ class RestaurantUpdateView(LoginRequiredMixin, UpdateView):
         return context
 
     def get_queryset(self):
-        return RestaurantLocation.objects.filter(owner=self.request.user)
+        return RestaurantLocation.objects.all()

@@ -9,11 +9,13 @@
 {% endblock %}
 
 {% block title_bar_right %}
-<div>
-    <h5><a style="color: white" href="{% url 'restaurants:create' %}">
-        <i class="fas fa-plus"></i></a>
-    </h5>
-</div>
+{% if user.is_authenticated %}
+    <div>
+        <h5><a style="color: white" href="{% url 'restaurants:create' %}">
+            <i class="fas fa-plus"></i></a>
+        </h5>
+    </div>
+{% endif %}
 {% endblock %}
 
 {% block items %}

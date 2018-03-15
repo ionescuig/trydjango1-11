@@ -34,9 +34,9 @@ class RestaurantLocationManager(models.Manager):
 
 
 class RestaurantLocation(models.Model):
-    owner = models.ForeignKey(User)
+    owner = models.ManyToManyField(User)
     name = models.CharField(max_length=120)
-    location = models.CharField(max_length=120, null=True, blank=True)
+    location = models.CharField(max_length=120, null=True, blank=False)
     category = models.CharField(max_length=120, null=True, blank=True, validators=[validate_category])
     timestamp = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -52,7 +52,7 @@ class RestaurantLocation(models.Model):
 
     @property
     def title(self):
-        return self.name # obj.title
+        return self.name  # obj.title
 
 
 def rl_pre_save_receiver(sender, instance, *args, **kwargs):
