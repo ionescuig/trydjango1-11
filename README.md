@@ -2,7 +2,7 @@
 
 <p class="text-muted">
     <i>
-        This is a work in progress.<br/>
+        This is work in progress.<br/>
         My time is limited, so the changes may take some time.
     </i>
 </p>
