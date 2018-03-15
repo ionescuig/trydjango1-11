@@ -1,13 +1,16 @@
+# Try Django 1.11
+
 <p class="text-muted">
     <i>
         This is a work in progress.<br/>
         My time is limited, so the changes may take some time.
     </i>
 </p>
-<br/>
+
 <p>
     The project is based on <strong>Try Django 1.11</strong> tutorial by CodingEntrepreneurs, which is hosted on
     <a href="https://www.youtube.com/watch?v=yDv5FIAeyoY">youtube</a>.
+    Hosted on [heroku](https://gabriel-muy-picky.herokuapp.com/)
 </p>
 
 Thinks that have been modified after finishing the tutorial:
