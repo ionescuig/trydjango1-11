@@ -10,7 +10,7 @@
 <p>
     The project is based on <strong>Try Django 1.11</strong> tutorial by CodingEntrepreneurs, which is hosted on
     <a href="https://www.youtube.com/watch?v=yDv5FIAeyoY">youtube</a>.
-    Hosted on [heroku](https://gabriel-muy-picky.herokuapp.com/)
+    Hosted on <a href="https://gabriel-muy-picky.herokuapp.com/">heroku</a>.
 </p>
 
 Thinks that have been modified after finishing the tutorial:
