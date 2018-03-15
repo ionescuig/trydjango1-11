@@ -3,13 +3,14 @@ from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import TemplateView
 
-from menus.views import HomeView
+from menus.views import HomeView, HomeFeedAnonymousView
 from profiles.views import ProfileFollowToggle, RegisterView, activate_user_view
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^user-feed$', HomeFeedAnonymousView.as_view(), name='anonymous'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
     url(r'^activate/(?P<code>[a-z0-9].*)/$', activate_user_view, name='activate'),
     url(r'^login/$', LoginView.as_view(), name='login'),

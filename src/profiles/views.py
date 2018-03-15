@@ -45,7 +45,7 @@ class ProfileFollowToggle(LoginRequiredMixin, View):
         return redirect(f'/u/{profile_.user.username}/')
 
 
-class ProfileDetailView(DetailView):
+class ProfileDetailView(LoginRequiredMixin, DetailView):
     template_name = 'profiles/user.html'
 
     def get_object(self):
