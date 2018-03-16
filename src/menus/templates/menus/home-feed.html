@@ -1,7 +1,11 @@
 {% extends 'base-list.html' %}
 
 {% block title_bar %}
-    <h5 class="mb-0 lh-100">User Following Feed</h5>
+    {% if user.is_authenticated %}
+        <h5 class="mb-0 lh-100">User Following Feed</h5>
+    {% else %}
+        <h5 class="mb-0 lh-100">User Feed</h5>
+    {% endif %}
 {% endblock %}
 
 {% block items %}

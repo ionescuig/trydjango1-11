@@ -21,10 +21,17 @@
 Things that have been modified after finishing the tutorial:
 <ul>
     <li>added bootstrap</li>
-    <li>modified relation restaurant-user, any user can see and add items to any restaurant</li>
+    <li>modified relation restaurant-user
+        <ul>
+            <li>any authenticated user can see and add items to any restaurant</li>
+            <li>anonymous users can see the restaurants list</li>
+            <li>anonymous users can see a general user-feed</li>
+        </ul>
+    <li>added restaurants to menu</li>
 </ul>
+
 In progress:
 <ul>
-    <li>adding option to see all restaurants</li>
+    <li>Modifying query (search) to show the right values</li>
 </ul>
 {% endblock %}
