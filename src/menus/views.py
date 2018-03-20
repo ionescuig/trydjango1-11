@@ -4,6 +4,7 @@ from django.views.generic import View, ListView, DetailView, CreateView, UpdateV
 
 from .forms import ItemForm
 from .models import Item
+from restaurants.models import RestaurantLocation
 
 
 class HomeView(View):
@@ -42,6 +43,8 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         obj = form.save(commit=False)
+        restaurant_ = RestaurantLocation.objects.get(pk__iexact=obj.restaurant.pk)
+        restaurant_.owner.add(self.request.user)
         obj.user = self.request.user
         return super(ItemCreateView, self).form_valid(form)
 
@@ -62,6 +65,13 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
 class ItemUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'menus/detail-update.html'
     form_class = ItemForm
+
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        restaurant_ = RestaurantLocation.objects.get(pk__iexact=obj.restaurant.pk)
+        restaurant_.owner.add(self.request.user)
+        obj.user = self.request.user
+        return super(ItemUpdateView, self).form_valid(form)
 
     def get_queryset(self):
         return Item.objects.filter(user=self.request.user)
