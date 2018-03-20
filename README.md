@@ -17,8 +17,10 @@ Things that have been modified after finishing the tutorial:
 <ul>
     <li>added bootstrap</li>
     <li>modified relation restaurant-user, any user can see and add items to any restaurant</li>
+    <li>added option to see all restaurants</li>
+    <li>auto add restaurant to user list when added an item to it</li>
 </ul>
 In progress:
 <ul>
-    <li>adding option to see all restaurants</li>
+    <li></li>
 </ul>
