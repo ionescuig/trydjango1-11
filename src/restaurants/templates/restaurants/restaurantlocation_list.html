@@ -23,11 +23,16 @@
         <a style="color: #279bbe" href="{{ obj.get_absolute_url }}">{{ obj.title }}</a>
     </strong>
     <small>
+        <span>
         <strong>Location: </strong>{{ obj.location }}
         <br/>
         <strong>Category: </strong>{{ obj.category }}
+        </span>
         <br/>
-        {{ obj.updated }}
+        <span style="color: #aaaaaa">
+        Created: {{ obj.timestamp }}<br/>
+        Updated: {{ obj.updated }}
+        </span>
     </small>
 {% endblock %}
 
