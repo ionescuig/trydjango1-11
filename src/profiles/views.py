@@ -2,7 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import CreateView, DetailView, View
+from django.views.generic import CreateView, DetailView, View, ListView
 
 from .forms import RegisterForm
 from .models import Profile
@@ -66,3 +66,9 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         if qs.exists():
             context['locations'] = qs
         return context
+
+
+class ProfileListView(ListView):
+    def get_queryset(self):
+        print(Profile.objects.all())
+        return Profile.objects.all().order_by('user')

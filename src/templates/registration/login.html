@@ -33,7 +33,9 @@
             <div class="py-2">
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
             </div>
+            <div>Did you need to <a href='{% url "register" %}'>Register</a>?
         </form>
+
     </div>
     {# Assumes you setup the password_reset view in your URLconf #}
     {# <p><a href="{% url 'password_reset' %}">Lost password?</a></p> #}

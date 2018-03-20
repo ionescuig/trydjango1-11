@@ -1,0 +1,20 @@
+{% extends "base-list.html" %}
+
+{% block head_title %}
+    Users | {{ block.super }}
+{% endblock %}
+
+{% block title_bar %}
+    <h5>Users</h5>
+{% endblock %}
+
+{% block title_bar_right %}
+{% endblock %}
+
+{% block items %}
+    <strong class="d-block">
+        <a style="color: #279bbe" href="{% url 'profiles:detail' username=obj.user.username %}">
+                {{ obj.user.username }}</a>
+    </strong>
+{% endblock %}
+
