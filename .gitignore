@@ -1,3 +1,7 @@
+src/muypicky/settings/local.py
+local.py
+local.*
+
 include/
 lib/
 scripts/

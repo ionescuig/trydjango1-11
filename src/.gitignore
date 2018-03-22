@@ -1,4 +1,6 @@
 src/muypicky/settings/local.py
+local.py
+local.*
 
 .py[cod]
 

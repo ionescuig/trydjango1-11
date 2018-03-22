@@ -28,14 +28,14 @@ DEBUG = False
 ALLOWED_HOSTS = ['gabriel-muy-picky.herokuapp.com']
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'gabriel.django.test@gmail.com'
+EMAIL_HOST_USER = os.environ.get("EMAIL")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_PASSWORD")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'MuyPicky <gabriel.django.test@gmail.com>'
+DEFAULT_FROM_EMAIL = os.environ.get("FROM_EMAIL")
 
 ADMINS = (
-    'MuyPicky <gabriel.django.test@gmail.com>',
+    os.environ.get("FROM_EMAIL"),
 )
 MANAGERS = ADMINS
 
