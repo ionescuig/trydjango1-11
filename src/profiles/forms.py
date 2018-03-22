@@ -34,6 +34,10 @@ class RegisterForm(forms.ModelForm):
         }
     ))
 
+    def __init__(self, *args, **kwargs):
+        self.base_url = kwargs.pop('base_url')
+        super(RegisterForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = User
         fields = ('username', 'email', 'password1', 'password2')
@@ -53,8 +57,10 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError("Passwords don't match")
         return password2
 
-    def save(self, commit=True):
+    def save(self, commit=True, **kwargs):
         # Save the provided password in hashed format
+        # print('> forms.save')
+        # print(self.base_url)
         user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
         user.is_active = True
@@ -62,5 +68,5 @@ class RegisterForm(forms.ModelForm):
 
         if commit:
             user.save()
-            user.profile.send_activation_email()
+            user.profile.send_activation_email(self.base_url)
         return user

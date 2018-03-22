@@ -3,6 +3,7 @@ from django.core.mail import send_mail
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_save
+from django.template.loader import render_to_string
 
 from .utils import code_generator
 
@@ -36,29 +37,35 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
-    def send_activation_email(self):
+    def send_activation_email(self, base_url):
         print("> Activation")
         if not self.activated:
             self.activation_key = code_generator()
             self.save()
-            path_ = reverse('activate', kwargs={"code": self.activation_key})
+
+            activate_url = base_url + reverse('activate', kwargs={"code": self.activation_key})
+            # print(activate_url)
+
+            template_name = 'profiles/html_message.html'
+            context = {'user': self.user, 'activate_url': activate_url}
+            html_content = render_to_string(template_name, context)
+
             subject = 'Activate account'
             from_email = settings.DEFAULT_FROM_EMAIL
-            message = f'Activate your account here: {path_}'
+            message = 'Activate your account here'
             recipient_list = [self.user.email]
-            html_message = f'<p>Activate your account here: {path_}</p>'
 
-            print(html_message)
-            sent_mail = False
+            # print(html_content)
+            # sent_mail = False
             # Uncomment to send email. After setting the right email in base.py
-            # sent_mail = send_mail(
-            #     subject,
-            #     message,
-            #     from_email,
-            #     recipient_list,
-            #     fail_silently=False,
-            #     html_message
-            # )
+            sent_mail = send_mail(
+                subject,
+                message,
+                from_email,
+                recipient_list,
+                fail_silently=False,
+                html_message=html_content
+            )
             return sent_mail
 
 

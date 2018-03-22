@@ -27,10 +27,20 @@ def activate_user_view(request, code=None, *args, **kwargs):
     return redirect("/login")
 
 
+def success_create_account(request):
+    return render(request, template_name='profiles/success_create_account.html', context={})
+
+
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = 'registration/register.html'
-    success_url = '/login/'
+    success_url = '/success'
+
+    def get_form_kwargs(self):
+        kwargs = super(RegisterView, self).get_form_kwargs()
+        base_url = "{0}://{1}".format(self.request.scheme, self.request.get_host())
+        kwargs.update({'base_url': base_url})
+        return kwargs
 
     def dispatch(self, *args, **kwargs):
         if self.request.user.is_authenticated():

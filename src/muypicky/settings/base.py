@@ -32,10 +32,10 @@ EMAIL_HOST_USER = 'youremail@gmail.com'
 EMAIL_HOST_PASSWORD = 'yourpassword'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Your name <you@gmail.com>'
+DEFAULT_FROM_EMAIL = 'YourName <youremail@gmail.com>'
 
 ADMINS = (
-    ('You', 'you@gmail.com'),
+    'YourName <youremail@gmail.com>',
 )
 MANAGERS = ADMINS
 

@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.views.generic import TemplateView
 
 from menus.views import HomeView, HomeFeedAnonymousView
-from profiles.views import ProfileFollowToggle, RegisterView, activate_user_view
+from profiles.views import ProfileFollowToggle, RegisterView, activate_user_view, success_create_account
 
 
 urlpatterns = [
@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
     url(r'^user-feed$', HomeFeedAnonymousView.as_view(), name='anonymous'),
     url(r'^register/$', RegisterView.as_view(), name='register'),
+    url(r'^success$', success_create_account, name='success'),
     url(r'^activate/(?P<code>[a-z0-9].*)/$', activate_user_view, name='activate'),
     url(r'^login/$', LoginView.as_view(), name='login'),
     url(r'^logout/$', LogoutView.as_view(), name='logout'),
