@@ -63,7 +63,7 @@ class RegisterForm(forms.ModelForm):
         # print(self.base_url)
         user = super(RegisterForm, self).save(commit=False)
         user.set_password(self.cleaned_data["password1"])
-        user.is_active = True
+        user.is_active = False
         # create a new user hash for activating email.
 
         if commit:
