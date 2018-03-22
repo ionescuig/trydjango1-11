@@ -25,10 +25,12 @@ Things that have been modified after finishing the tutorial:
         </ul>
     <li>menu bar: added option to see all restaurants</li>
     <li>auto add restaurant to user's list when adding/modifying an item</li>
-    <li>added the option to see all users</li>
+    <li>option to see all users</li>
+    <li>email confirmation for accounts</li>
+
 </ul>
 
 In progress:
 <ul>
-    <li>email confirmation</li>
+    <li>reset password</li>
 </ul>
