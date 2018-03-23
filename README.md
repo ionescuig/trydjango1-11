@@ -28,6 +28,7 @@ Things that have been modified after finishing the tutorial:
     <li>Added: option to see all users</li>
     <li>Added: email confirmation for new accounts</li>
     <li>Added: option to modify the username or the password</li>
+    <li>Added: dj-static and django-toolbelt to render properly the admin page on heroku</li>
 
 </ul>
 
