@@ -70,3 +70,41 @@ class RegisterForm(forms.ModelForm):
             user.save()
             user.profile.send_activation_email(self.base_url)
         return user
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    """
+    A form for updating a user. Includes all the required
+    fields, plus a repeated password.
+    """
+    username = forms.CharField(label='Username', widget=forms.TextInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Username'
+        }
+    ))
+    email = forms.CharField(label='Email', widget=forms.EmailInput(
+        attrs={
+            'class': 'form-control',
+            'placeholder': 'Email'
+        }
+    ))
+
+    class Meta:
+        model = User
+        fields = ('username', 'email')
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        qs = User.objects.filter(email__iexact=email)
+        email_user = self.instance.email
+        print(self.instance.email)
+        if email != email_user:
+            if qs.exists():
+                raise forms.ValidationError("Cannot use this email. It's already registered.")
+        return email
+
+    def save(self, commit=True, **kwargs):
+        user = super(ProfileUpdateForm, self).save(commit=False)
+        user.save()
+        return user

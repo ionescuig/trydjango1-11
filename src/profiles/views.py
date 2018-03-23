@@ -2,9 +2,9 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views.generic import CreateView, DetailView, View, ListView
+from django.views.generic import CreateView, DetailView, View, ListView, UpdateView
 
-from .forms import RegisterForm
+from .forms import RegisterForm, ProfileUpdateForm
 from .models import Profile
 from restaurants.models import RestaurantLocation
 
@@ -78,7 +78,18 @@ class ProfileDetailView(LoginRequiredMixin, DetailView):
         return context
 
 
+class ProfileUpdateView(LoginRequiredMixin, UpdateView):
+    form_class = ProfileUpdateForm
+    template_name = 'profiles/detail-update.html'
+    success_url = '/'
+
+    def get_object(self):
+        username = self.kwargs.get("username")
+        if username is None:
+            raise Http404
+        return get_object_or_404(User, username__iexact=username, is_active=True)
+
+
 class ProfileListView(ListView):
     def get_queryset(self):
-        print(Profile.objects.all())
         return Profile.objects.all().order_by('user')
