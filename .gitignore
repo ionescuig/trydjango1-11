@@ -2,6 +2,7 @@ src/muypicky/settings/local.py
 local.py
 local.*
 
+staticfiles/
 include/
 lib/
 scripts/
