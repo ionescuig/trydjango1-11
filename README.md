@@ -1,8 +1,7 @@
 # Try Django 1.11
 
 <p>
-    The project is based on <strong>Try Django 1.11</strong> tutorial by CodingEntrepreneurs, which is hosted on
-    <a href="https://www.youtube.com/watch?v=yDv5FIAeyoY">youtube</a>.
+    The project is based on <a href="https://www.youtube.com/watch?v=yDv5FIAeyoY">Try Django 1.11</a> tutorial by CodingEntrepreneurs.
     <br/>Hosted on <a href="https://gabriel-muy-picky.herokuapp.com/">heroku</a>.
 </p>
 
