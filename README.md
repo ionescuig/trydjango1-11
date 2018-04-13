@@ -1,12 +1,5 @@
 # Try Django 1.11
 
-<p class="text-muted">
-    <i>
-        This is work in progress.<br/>
-        My time is limited, so the changes may take some time.
-    </i>
-</p>
-
 <p>
     The project is based on <strong>Try Django 1.11</strong> tutorial by CodingEntrepreneurs, which is hosted on
     <a href="https://www.youtube.com/watch?v=yDv5FIAeyoY">youtube</a>.
